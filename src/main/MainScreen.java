@@ -78,10 +78,12 @@ public class MainScreen {
         
         //Add the card to the JFrame
         constraints.gridy = 0; //first row
-        frameContentPane.add(new JLabel("Welcome to Virtual Trainer!"), constraints);
-        constraints.gridy = 1; //second row
         frameContentPane.add(buttonPanel, constraints);
-        constraints.gridy = 2;
+        constraints.gridy = 1; //second row
+        frameContentPane.add(new JLabel("Welcome to Virtual Trainer!"), constraints);
+        constraints.gridy = 2; //second row
+        frameContentPane.add(new JLabel("Please select one of the options above."), constraints);
+        constraints.gridy = 3;
         frameContentPane.add(homePanel, constraints);
         frameContentPane.add(workoutPanel, constraints);
         
