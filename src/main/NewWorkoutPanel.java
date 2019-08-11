@@ -15,37 +15,37 @@ public class NewWorkoutPanel {
 
 	public JPanel createNewWorkoutPanel() {
 
-		JCheckBox option1 = new JCheckBox("Option 1");
-		JCheckBox option2 = new JCheckBox("Option 2");
+		JCheckBox buildMuscleCheckbox = new JCheckBox("Build muscle");
+		JCheckBox burnFatCheckbox = new JCheckBox("Burn fat");
 
-		JPanel panel = new JPanel();
+		JPanel newWorkoutPanel = new JPanel();
 
-		option1.addActionListener(new ActionListener() {
+		buildMuscleCheckbox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (option1.isSelected())
-					System.out.println(option1.getText() + " selected.");
+				if (buildMuscleCheckbox.isSelected())
+					System.out.println(buildMuscleCheckbox.getText() + " selected.");
 
 			}
 		});
 
-		option2.addActionListener(new ActionListener() {
+		burnFatCheckbox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (option2.isSelected())
-					System.out.println(option2.getText() + " selected.");
+				if (burnFatCheckbox.isSelected())
+					System.out.println(burnFatCheckbox.getText() + " selected.");
 
 			}
 		});
 
-		panel.add(new JLabel("Fitness goals: "));
-		panel.add(option1);
-		panel.add(option2);
-		panel.add(new JLabel("Preferred workout duration: "));
+		newWorkoutPanel.add(new JLabel("Fitness goals: "));
+		newWorkoutPanel.add(buildMuscleCheckbox);
+		newWorkoutPanel.add(burnFatCheckbox);
+		newWorkoutPanel.add(new JLabel("Preferred workout duration: "));
 
-		return panel;
+		return newWorkoutPanel;
 
 	}
 }
