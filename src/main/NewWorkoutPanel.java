@@ -38,8 +38,12 @@ public class NewWorkoutPanel {
 		});
 
 		newWorkoutPanel.add(new JLabel("Fitness goals: "));
-		newWorkoutPanel.add(buildMuscleCheckbox);
-		newWorkoutPanel.add(burnFatCheckbox);
+
+		String[] options = { "Build muscle", "Burn fat" };
+		ArrayList<JCheckBox> checkBoxGroup = makeCheckBoxGroup(options);
+		for (JCheckBox checkBox : checkBoxGroup)
+			newWorkoutPanel.add(checkBox);
+
 		newWorkoutPanel.add(new JLabel("Preferred workout duration: "));
 
 		return newWorkoutPanel;
@@ -55,6 +59,17 @@ public class NewWorkoutPanel {
 
 			checkBox = new JCheckBox(option);
 			checkBoxGroup.add(checkBox);
+
+		}
+
+		for (JCheckBox box : checkBoxGroup) {
+
+			box.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println(box.getText() + " is selected");
+				}
+			});
 
 		}
 
