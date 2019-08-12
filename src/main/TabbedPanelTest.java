@@ -24,7 +24,7 @@ public class TabbedPanelTest {
 		tp.add("help", p3);
 		f.setLayout(new BorderLayout());
 		f.add(tp, BorderLayout.CENTER);
-		f.setSize(400, 400);		
+		f.setSize(800, 800);		
 		f.setVisible(true);
 
 	}

@@ -2,12 +2,15 @@ package main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class NewWorkoutPanel {
+
+	ArrayList<String> selectedOptions = new ArrayList<String>();
 
 	public NewWorkoutPanel() {
 
@@ -24,18 +27,12 @@ public class NewWorkoutPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (buildMuscleCheckbox.isSelected())
-					System.out.println(buildMuscleCheckbox.getText() + " selected.");
-
 			}
 		});
 
 		burnFatCheckbox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				if (burnFatCheckbox.isSelected())
-					System.out.println(burnFatCheckbox.getText() + " selected.");
 
 			}
 		});
@@ -48,4 +45,21 @@ public class NewWorkoutPanel {
 		return newWorkoutPanel;
 
 	}
+
+	public ArrayList<JCheckBox> makeCheckBoxGroup(String[] options) {
+
+		JCheckBox checkBox;
+		ArrayList<JCheckBox> checkBoxGroup = new ArrayList<JCheckBox>();
+
+		for (String option : options) {
+
+			checkBox = new JCheckBox(option);
+			checkBoxGroup.add(checkBox);
+
+		}
+
+		return checkBoxGroup;
+
+	}
+
 }
