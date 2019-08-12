@@ -1,10 +1,14 @@
 package main;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,8 +16,9 @@ import javax.swing.JRadioButton;
 
 public class NewWorkoutPanel {
 
-	ArrayList<String> selectedOptions = new ArrayList<String>();
-	JPanel newWorkoutPanel = new JPanel();
+	HashMap<String, Boolean> selectedOptions = new HashMap<String, Boolean>();
+	JPanel newWorkoutPanel = new JPanel(new GridBagLayout());
+	GridBagConstraints layoutConstraints = new GridBagConstraints();
 
 	public NewWorkoutPanel() {
 
@@ -23,11 +28,15 @@ public class NewWorkoutPanel {
 				add("Burn fat");
 			}
 		};
-		createOptionsGroup("Fitness goals:", options, false, true);
+		layoutConstraints.anchor = GridBagConstraints.NORTH;
+		layoutConstraints.weighty = 0.3;
+		createOptionsGroup("Fitness goals:", options, false, true, layoutConstraints);
 
 		options.clear();
 		options.addAll(Arrays.asList(".5 hrs", "1 hr", "1.5 hrs", "2+ hrs"));
-		createOptionsGroup("Preferred workout duration:", options, true, false);
+		layoutConstraints.weighty = 7.0;
+		layoutConstraints.gridy = 1;
+		createOptionsGroup("Preferred workout duration:", options, true, false, layoutConstraints);
 
 	}
 
@@ -38,26 +47,29 @@ public class NewWorkoutPanel {
 	}
 
 	/*
-	 * Sets up an option group.
+	 * Sets up an option group and adds it to the panel.
 	 * 
 	 * @param _label the prompt for the options
 	 * 
 	 * @param options the list of responses for the prompt
 	 */
 	public void createOptionsGroup(String _label, ArrayList<String> options, boolean isRadioButtonGroup,
-			boolean isCheckBoxGroup) {
+			boolean isCheckBoxGroup, GridBagConstraints constraints) {
 
 		JLabel label = new JLabel(_label);
-		newWorkoutPanel.add(label);
+		newWorkoutPanel.add(label, constraints);
 
 		if (isCheckBoxGroup) {
 			ArrayList<JCheckBox> checkBoxGroup = makeCheckBoxGroup(options);
 			for (JCheckBox checkBox : checkBoxGroup)
-				newWorkoutPanel.add(checkBox);
+				newWorkoutPanel.add(checkBox, constraints);
 		} else {
 			ArrayList<JRadioButton> radioButtonGroup = makeRadioButtonGroup(options);
-			for (JRadioButton radioButton : radioButtonGroup)
-				newWorkoutPanel.add(radioButton);
+			ButtonGroup group = new ButtonGroup();
+			for (JRadioButton radioButton : radioButtonGroup) {
+				group.add(radioButton);
+				newWorkoutPanel.add(radioButton, constraints);
+			}
 		}
 
 	}
@@ -82,7 +94,10 @@ public class NewWorkoutPanel {
 			box.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(box.getText() + " is selected");
+					if (box.isSelected())
+						selectedOptions.put(box.getText(), true);
+					else
+						selectedOptions.put(box.getText(), false);
 				}
 			});
 
@@ -109,7 +124,10 @@ public class NewWorkoutPanel {
 			button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(button.getText() + " is selected");
+					if (button.isSelected())
+						selectedOptions.put(button.getText(), true);
+					else
+						selectedOptions.put(button.getText(), false);
 				}
 			});
 

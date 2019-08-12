@@ -48,7 +48,7 @@ public class MainScreen {
 
 		NewWorkoutPanel newWorkoutPanel = new NewWorkoutPanel();
 		JPanel workoutPanel = new JPanel();
-		workoutPanel.add(newWorkoutPanel.createNewWorkoutPanel());
+		workoutPanel.add(newWorkoutPanel.getPanel());
 		workoutPanel.setVisible(false);
 
 		homeButton.addActionListener(new ActionListener() {
