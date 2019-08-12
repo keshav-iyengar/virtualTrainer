@@ -3,54 +3,69 @@ package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class NewWorkoutPanel {
 
 	ArrayList<String> selectedOptions = new ArrayList<String>();
+	JPanel newWorkoutPanel = new JPanel();
 
 	public NewWorkoutPanel() {
 
-	}
-
-	public JPanel createNewWorkoutPanel() {
-
-		JCheckBox buildMuscleCheckbox = new JCheckBox("Build muscle");
-		JCheckBox burnFatCheckbox = new JCheckBox("Burn fat");
-
-		JPanel newWorkoutPanel = new JPanel();
-
-		buildMuscleCheckbox.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
+		ArrayList<String> options = new ArrayList<String>() {
+			{
+				add("Build muscle");
+				add("Burn fat");
 			}
-		});
+		};
+		createOptionsGroup("Fitness goals:", options, false, true);
 
-		burnFatCheckbox.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-
-		newWorkoutPanel.add(new JLabel("Fitness goals: "));
-
-		String[] options = { "Build muscle", "Burn fat" };
-		ArrayList<JCheckBox> checkBoxGroup = makeCheckBoxGroup(options);
-		for (JCheckBox checkBox : checkBoxGroup)
-			newWorkoutPanel.add(checkBox);
-
-		newWorkoutPanel.add(new JLabel("Preferred workout duration: "));
-
-		return newWorkoutPanel;
+		options.clear();
+		options.addAll(Arrays.asList(".5 hrs", "1 hr", "1.5 hrs", "2+ hrs"));
+		createOptionsGroup("Preferred workout duration:", options, true, false);
 
 	}
 
-	public ArrayList<JCheckBox> makeCheckBoxGroup(String[] options) {
+	public JPanel getPanel() {
+
+		return this.newWorkoutPanel;
+
+	}
+
+	/*
+	 * Sets up an option group.
+	 * 
+	 * @param _label the prompt for the options
+	 * 
+	 * @param options the list of responses for the prompt
+	 */
+	public void createOptionsGroup(String _label, ArrayList<String> options, boolean isRadioButtonGroup,
+			boolean isCheckBoxGroup) {
+
+		JLabel label = new JLabel(_label);
+		newWorkoutPanel.add(label);
+
+		if (isCheckBoxGroup) {
+			ArrayList<JCheckBox> checkBoxGroup = makeCheckBoxGroup(options);
+			for (JCheckBox checkBox : checkBoxGroup)
+				newWorkoutPanel.add(checkBox);
+		} else {
+			ArrayList<JRadioButton> radioButtonGroup = makeRadioButtonGroup(options);
+			for (JRadioButton radioButton : radioButtonGroup)
+				newWorkoutPanel.add(radioButton);
+		}
+
+	}
+
+	/*
+	 * Establishes a list of checkbox options and adds action listeners to them.
+	 */
+	public ArrayList<JCheckBox> makeCheckBoxGroup(ArrayList<String> options) {
 
 		JCheckBox checkBox;
 		ArrayList<JCheckBox> checkBoxGroup = new ArrayList<JCheckBox>();
@@ -74,6 +89,33 @@ public class NewWorkoutPanel {
 		}
 
 		return checkBoxGroup;
+
+	}
+
+	public ArrayList<JRadioButton> makeRadioButtonGroup(ArrayList<String> options) {
+
+		JRadioButton radioButton;
+		ArrayList<JRadioButton> radioButtonGroup = new ArrayList<JRadioButton>();
+
+		for (String option : options) {
+
+			radioButton = new JRadioButton(option);
+			radioButtonGroup.add(radioButton);
+
+		}
+
+		for (JRadioButton button : radioButtonGroup) {
+
+			button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println(button.getText() + " is selected");
+				}
+			});
+
+		}
+
+		return radioButtonGroup;
 
 	}
 

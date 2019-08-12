@@ -13,7 +13,7 @@ public class TabbedPanelTest {
 		JFrame f = new JFrame();
 		// JTextArea ta = new JTextArea(200, 200);
 		NewWorkoutPanel newWorkoutPanel = new NewWorkoutPanel();
-		JPanel p1 = newWorkoutPanel.createNewWorkoutPanel();
+		JPanel p1 = newWorkoutPanel.getPanel();
 //		p1.add(ta);
 		JPanel p2 = new JPanel();
 		JPanel p3 = new JPanel();
