@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -20,9 +22,9 @@ public class TabbedPanelTest {
 		tp.add("main", p1);
 		tp.add("visit", p2);
 		tp.add("help", p3);
-		f.add(tp);
-		f.setSize(400, 400);
-		f.setLayout(null);
+		f.setLayout(new BorderLayout());
+		f.add(tp, BorderLayout.CENTER);
+		f.setSize(400, 400);		
 		f.setVisible(true);
 
 	}
