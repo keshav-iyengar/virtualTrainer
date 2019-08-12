@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,9 +35,20 @@ public class NewWorkoutPanel {
 
 		options.clear();
 		options.addAll(Arrays.asList(".5 hrs", "1 hr", "1.5 hrs", "2+ hrs"));
-		layoutConstraints.weighty = 7.0;
 		layoutConstraints.gridy = 1;
+		layoutConstraints.weighty = 7.0;
 		createOptionsGroup("Preferred workout duration:", options, true, false, layoutConstraints);
+
+		JButton submitButton = new JButton("Submit");
+		submitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Trainer trainer = new Trainer(selectedOptions);
+			}
+		});
+
+		layoutConstraints.gridy = 2;
+		newWorkoutPanel.add(submitButton, layoutConstraints);
 
 	}
 
